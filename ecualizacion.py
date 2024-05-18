@@ -21,7 +21,8 @@ def ecualizar_imagen(input_path, output_path):
     MAX = 50
     
     # Aplicar la fórmula de ecualización
-    img_eq = ((img - f_min) / (f_max - f_min)) * (MAX - MIN) + MIN
+    #img_eq = ((img - f_min) / (f_max - f_min)) * (MAX - MIN) + MIN
+    img_eq = (f_max - f_min) * img + f_min
     img_eq = img_eq.astype(np.uint8)  # Convertir a uint8
     print(np.max(img_eq))
     print(np.min(img_eq))
