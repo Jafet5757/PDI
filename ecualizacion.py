@@ -22,14 +22,17 @@ def ecualizar_imagen(input_path, output_path):
     
     # Aplicar la fórmula de ecualización
     img_eq = ((img - f_min) / (f_max - f_min)) * (MAX - MIN) + MIN
-    #img_eq = img_eq.astype(np.uint8)  # Convertir a uint8
+    img_eq = img_eq.astype(np.uint8)  # Convertir a uint8
+    print(np.max(img_eq))
+    print(np.min(img_eq))
     
     # mostramos las dos imágenes
     plt.subplot(1, 2, 1)
     plt.imshow(img, cmap='gray')
     plt.title("Imagen original")
     plt.subplot(1, 2, 2)
-    plt.imshow(img_eq, cmap='gray')
+    # indicamos que los valores de intensidad están en el rango 0-255
+    plt.imshow(img_eq, cmap='gray', vmin=0, vmax=255)
     plt.title("Imagen ecualizada")
     plt.show()
 
@@ -68,24 +71,6 @@ def main():
 
     # Llamar a la función para ecualizar la imagen
     ecualizar_imagen(input_image_path, output_image_path)
-
-    # Leer la imagen y convertirla a escala de grises
-    image = Image.open(input_image_path).convert("L")
-    plt.subplot(1, 2, 1)
-    plt.imshow(image, cmap='gray')
-    plt.title("Imagen original")
-
-    # Definir una máscara (ejemplo con filtro Sobel)
-    mask = [[1, 0, -1], [2, 0, -2], [1, 0, -1]]  # Sobel
-
-    # Crear el filtro y aplicar la máscara
-    filter = Filter(image, mask)
-    newImage = filter.applyFilter()
-    
-    plt.subplot(1, 2, 2)
-    plt.imshow(newImage, cmap='gray')
-    plt.title("Imagen filtrada")
-    plt.show()
 
 if __name__ == "__main__":
     main()
