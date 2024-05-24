@@ -28,7 +28,7 @@ class Filter:
     self.newImage.putpixel((x, y), int(total/(self.widthMask*(self.heightMask+N))))
 
 def main():
-  image = Image.open("tigre.jpeg").convert("L")
+  image = Image.open("pasto.jpg").convert("L")
   plt.subplot(1, 2, 1)
   plt.imshow(image, cmap='gray')
   plt.title("Imagen original")
@@ -40,7 +40,7 @@ def main():
   #mask = [[1, 1, 1], [1, 1, 1], [1, 1, 1]] # promedio
   #mask = [[1, 1, 1], [1, 8, 1], [1, 1, 1]] # promedio ponderado, N = 8
   filter = Filter(image, mask)
-  newImage = filter.applyFilter()
+  newImage = filter.applyFilter(N=-7)
   plt.subplot(1, 2, 2)
   plt.imshow(newImage, cmap='gray')
   plt.title("Imagen filtrada")
