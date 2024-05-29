@@ -36,7 +36,7 @@ class Filter:
 
 
 def main():
-  image = Image.open("pasto2.jpg").convert("L")
+  image = Image.open("pasto.jpg").convert("L")
   #mask = [[1, 0, -1], [2, 0, -2], [1, 0, -1]] # Sobel
   mask = [[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]] # Prewit fila
   #mask = [[-1, -1, -1], [0, 0, 0], [1, 1, 1]] # Prewit columna
