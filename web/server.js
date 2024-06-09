@@ -36,6 +36,25 @@ app.post('/loadImage', upload.single('image'), (req, res) => {
     });
 })
 
+app.get('/generalProcess', (req, res) => { 
+  // procesamos la imagen
+  const type = req.query.type;
+  const image = req.query.image;
+  const api_url = 'http://127.0.0.1:8000/'
+  // contruimos la url para el servidor de python
+  const url = `${api_url}${type}?image_path=${image}`;
+  // enviamos la peticion
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log('La imagen temp en images-processed/temp.jpg se ha procesado correctamente');
+      res.json(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+})
+
 app.listen(port, () => {
   console.log(`El servidor está escuchando en http://localhost:${port}`);
 });

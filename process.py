@@ -44,3 +44,47 @@ def autoDetect(path):
   cv2.imwrite("temp2.jpg", image)
   cv2.imwrite("temp3.jpg", restricted)
   return {'image1':"temp2.jpg", 'image2':"temp.jpg", 'image3':"temp3.jpg"}
+
+def prewit(path):
+  # leemos la imagen a color
+  image = cv2.imread(path)
+  # Convertimos la imagen a escala de grises
+  gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+  # Aplicamos el filtro de Prewitt en el eje x
+  prewittx = cv2.filter2D(gray, cv2.CV_64F, np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]]))
+  # Guardamos la imagen resultante de forma temporal
+  cv2.imwrite("temp.jpg", prewittx)
+  return "temp.jpg"
+
+def average(path):
+  # leemos la imagen a color
+  image = cv2.imread(path)
+  # Convertimos la imagen a escala de grises
+  gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+  # Aplicamos el filtro de la media
+  average = cv2.blur(gray, (3, 3))
+  # Guardamos la imagen resultante de forma temporal
+  cv2.imwrite("temp.jpg", average)
+  return "temp.jpg"
+
+def otsu(path):
+  # leemos la imagen a color
+  image = cv2.imread(path)
+  # Convertimos la imagen a escala de grises
+  gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+  # Aplicamos el método de Otsu
+  _, otsu = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+  # Guardamos la imagen resultante de forma temporal
+  cv2.imwrite("temp.jpg", otsu)
+  return "temp.jpg"
+
+def ecualization(path):
+  # leemos la imagen a color
+  image = cv2.imread(path)
+  # Convertimos la imagen a escala de grises
+  gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+  # Aplicamos la ecualización del histograma
+  equalized = cv2.equalizeHist(gray)
+  # Guardamos la imagen resultante de forma temporal
+  cv2.imwrite("temp.jpg", equalized)
+  return "temp.jpg"

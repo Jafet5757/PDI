@@ -6,6 +6,13 @@ const startButton = document.querySelector('#start-btn');
 const resetButton = document.querySelector('#reset-btn');
 const api_url = 'http://127.0.0.1:8000/';
 
+function updateSrcImage(src) {
+  // agregamos parametros a la imagen para que no se cachee
+  const currentSrc = src;
+  const newSrc = currentSrc.split('?')[0] + '?t=' + new Date().getTime();
+  return newSrc;
+}
+
 inputImage.addEventListener('change', (e) => { 
   // cargamos la imagen en el contenedor
   const file = e.target.files[0];
@@ -65,6 +72,10 @@ startButton.addEventListener('click', async () => {
     const temp3 = new Image();
     temp.src = 'images-processed/temp.jpg';
     temp3.src = 'images-processed/temp3.jpg';
+
+    // actualizamos la url de las imagenes
+    temp.src = updateSrcImage(temp.src);
+    temp3.src = updateSrcImage(temp3.src);
     
     // les agregamos un id
     temp.id = 'temp';

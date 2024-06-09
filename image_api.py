@@ -40,3 +40,59 @@ async def process_image(image_path):
         image.write(open("temp3.jpg", "rb").read())
 
     return res
+
+@app.get("/prewit")
+async def prewit(image_path):
+    # descarga la imagen
+    with open("./temp/image_recibida.jpg", "wb") as image:
+        image.write(requests.get(image_path).content)
+    # procesa la imagen
+    image_path = "./temp/image_recibida.jpg"
+    res = process.prewit(image_path)
+    # Movemos la imagen temp a la carpeta web\public\images-processed
+    with open("./web/public/images-processed/temp.jpg", "wb") as image:
+        image.write(open("temp.jpg", "rb").read())
+
+    return res
+
+@app.get("/average")
+async def average(image_path):
+    # descarga la imagen
+    with open("./temp/image_recibida.jpg", "wb") as image:
+        image.write(requests.get(image_path).content)
+    # procesa la imagen
+    image_path = "./temp/image_recibida.jpg"
+    res = process.average(image_path)
+    # Movemos la imagen temp a la carpeta web\public\images-processed
+    with open("./web/public/images-processed/temp.jpg", "wb") as image:
+        image.write(open("temp.jpg", "rb").read())
+
+    return res
+
+@app.get("/otsu")
+async def otsu(image_path):
+    # descarga la imagen
+    with open("./temp/image_recibida.jpg", "wb") as image:
+        image.write(requests.get(image_path).content)
+    # procesa la imagen
+    image_path = "./temp/image_recibida.jpg"
+    res = process.otsu(image_path)
+    # Movemos la imagen temp a la carpeta web\public\images-processed
+    with open("./web/public/images-processed/temp.jpg", "wb") as image:
+        image.write(open("temp.jpg", "rb").read())
+
+    return res
+
+@app.get("/ecualization")
+async def ecualization(image_path):
+    # descarga la imagen
+    with open("./temp/image_recibida.jpg", "wb") as image:
+        image.write(requests.get(image_path).content)
+    # procesa la imagen
+    image_path = "./temp/image_recibida.jpg"
+    res = process.ecualization(image_path)
+    # Movemos la imagen temp a la carpeta web\public\images-processed
+    with open("./web/public/images-processed/temp.jpg", "wb") as image:
+        image.write(open("temp.jpg", "rb").read())
+
+    return res

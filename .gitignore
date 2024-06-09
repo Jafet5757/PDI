@@ -1,2 +1,3 @@
 *.exe
 /web/node_modules
+/web/public/uploads
