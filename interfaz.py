@@ -6,13 +6,18 @@ def main(page: ft.Page):
     
     # Crear un FilePicker
     file_picker = ft.FilePicker(on_result=lambda e: on_file_picked(e))
-
+    
     # Crear un botón para abrir el FilePicker
     pick_file_button = ft.ElevatedButton(text="Subir Archivo", on_click=lambda e: file_picker.pick_files())
+    
+    # Crear un contenedor para las imágenes
+    image_container = ft.Column()
 
     # Función que se ejecuta cuando se selecciona un archivo
     def on_file_picked(e):
         if e.files:
+            # Limpiar el contenedor de imágenes para evitar imágenes anteriores
+            image_container.controls.clear()
             # Obtener la ruta del archivo seleccionado
             file_path = e.files[0].path
             gray, median, restricted = pr.autoDetect(file_path)
@@ -31,19 +36,28 @@ def main(page: ft.Page):
                 alignment=ft.MainAxisAlignment.CENTER
             )
             
-            # Agregar la fila a la página
-            page.add(image_row)
+            # Agregar la fila al contenedor de imágenes
+            image_container.controls.append(image_row)
         else:
-            page.add(ft.Text("No se seleccionó ningún archivo."))
+            image_container.controls.append(ft.Text("No se seleccionó ningún archivo."))
         page.update()
-
-     # Añadir el botón y el FilePicker a la página
+    
+    # Función para reiniciar la aplicación
+    def reset_images(e):
+        image_container.controls.clear()
+        page.update()
+    
+    # Crear un botón para reiniciar
+    reset_button = ft.ElevatedButton(text="Reiniciar", on_click=reset_images)
+    
+    # Añadir los botones y el FilePicker a la página
     page.add(pick_file_button)
+    page.add(reset_button)
+    page.add(image_container)
     
     # Registrar el FilePicker en la página
     page.overlay.append(file_picker)
-
-  
+    
     # Actualizar la página para mostrar los cambios
     page.update()
 

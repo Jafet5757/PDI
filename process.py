@@ -43,4 +43,4 @@ def autoDetect(path):
   cv2.imwrite("temp.jpg", median)
   cv2.imwrite("temp2.jpg", image)
   cv2.imwrite("temp3.jpg", restricted)
-  return "temp2.jpg", "temp.jpg", "temp3.jpg"
+  return {'image1':"temp2.jpg", 'image2':"temp.jpg", 'image3':"temp3.jpg"}
